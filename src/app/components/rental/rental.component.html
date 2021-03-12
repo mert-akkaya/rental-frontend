@@ -1,0 +1,24 @@
+<div *ngIf="dataLoad==false" class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+<table *ngIf="dataLoad==true" class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Brand Name</th>
+        <th scope="col">Customer Name</th>
+        <th scope="col">Rent Date</th>
+        <th scope="col">Return Date</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let rental of rentals">
+      <tr>
+        <td>{{rental.rentalId}}</td>
+        <td>{{rental.brandName}}</td>
+        <td>{{rental.customerName}}</td>
+        <td>{{rental.rentDate}}</td>
+        <td>{{rental.returnDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+
