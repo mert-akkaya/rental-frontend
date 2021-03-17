@@ -14,6 +14,7 @@ export class CarComponent implements OnInit {
 
   cars:Car[]=[];
   dataLoad=false;
+  carImageDefault:"https://localhost:44302//Images/logo.jpg";
   baseImagePath = environment.baseImageUrl;
   constructor(private carService:CarService,private activatedRoute:ActivatedRoute,private carDetailService:CarDetailService) { }
 
@@ -56,12 +57,5 @@ export class CarComponent implements OnInit {
       }
     })
   }
-
-  getImages(){
-    this.carDetailService.getImages().subscribe(response=>{
-      this.cars=response.data;
-    })
-  }
-  
 
 }

@@ -14,13 +14,13 @@ export class CarDetailService {
   apiUrl="https://localhost:44302/api/";
   constructor(private httpClient:HttpClient) { }
 
-  getImagesById(carId:number):Observable<ListResponseModel<Car>>{
+  getImagesById(carId:number):Observable<ListResponseModel<CarImage>>{
     let newPath=this.apiUrl+"carimages/getimagesbycarid?id="+carId
-    return this.httpClient.get<ListResponseModel<Car>>(newPath)
+    return this.httpClient.get<ListResponseModel<CarImage>>(newPath)
   }
 
-  getImages():Observable<ListResponseModel<Car>>{
+  getImages():Observable<ListResponseModel<CarImage>>{
     let newPath=this.apiUrl+"carimages/getall";
-    return this.httpClient.get<ListResponseModel<Car>>(newPath);
+    return this.httpClient.get<ListResponseModel<CarImage>>(newPath);
   }
 }

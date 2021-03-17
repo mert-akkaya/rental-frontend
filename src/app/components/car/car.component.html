@@ -1,4 +1,4 @@
-<div *ngIf="dataLoad==false" class="spinner-border text-primary" role="status">
+<!-- <div *ngIf="dataLoad==false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
 <table *ngIf="dataLoad==true" class="table">
@@ -28,4 +28,26 @@
       </tr>
     </tbody>
   </table>
-
+ -->
+ <div class="text-center"><strong>Cars</strong></div>
+<div *ngIf="dataLoad==false" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+</div>
+<div class="row">
+    <div *ngFor="let car of cars" class="card" style="width: 17rem;">
+        <div>
+            <img *ngIf="car.imagePath==null" src="https://localhost:44302//Images/logo.jpg" alt="{{car.carId}}" class="card-img-top" width="320" height="200">
+            <img *ngIf="car.imagePath!=null" src="{{baseImagePath+car.imagePath}}" alt="{{car.carId}}" class="card-img-top" width="320" height="200">
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Brand: {{car.brandName}}</li>
+                <li class="list-group-item">Model Year: {{car.modelYear}}</li>
+                <li class="list-group-item">Daily Price: {{car.dailyPrice}} $</li>
+            </ul>
+            <section style="float:left">
+                <button routerLink="/car-detail/{{car.carId}}" type="button" class="btn btn-primary">Detaylar</button>
+            </section>
+        </div>
+    </div>
+</div>
