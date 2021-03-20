@@ -1,0 +1,81 @@
+<div class="card mt-4">
+    <div class="card-header text-center">
+      <strong>Details</strong>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Start Date</th>
+            <th>Finis Date</th>
+            <th>Brand</th>
+            <th>Color</th>
+            <th>Model Year</th>
+            <th>Daily Price</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td>{{rental.rentDate}}</td>
+            <td>{{rental.returnDate}}</td>
+            <td>{{car.brandName}}</td>
+            <td>{{car.colorName}}</td>
+            <td>{{car.modelYear}}</td>
+            <td>{{car.dailyPrice | currency}}</td>
+            <td><strong class="text-danger">{{rental.totalPrice | currency:"₺"}}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+  </div>
+
+  <div class="card mt-4">
+  <div class="card-header text-center">
+    <strong>Payment</strong>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="inputbox mt-3">
+        <span>Customer Name</span>
+        <input type="text" class="form-control" [value]="rental.carId" disabled>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="inputbox mt-3 mr-2">
+            <span>Cart Number</span>
+            <input
+            [(ngModel)]="cartNumber"
+              type="text"
+              name="name"
+              class="form-control"
+              required="required"
+            />
+            <i class="fa fa-credit-card"></i>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex flex-row">
+            <div class="inputbox mt-3 mr-2">
+              <span>CVV</span>
+              <input
+              [(ngModel)]="cvv"
+                type="number"
+                name="name"
+                class="form-control"
+                required="required"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="card-footer">
+    <div class="row">
+        <button (click)="addPayment()" class="btn btn-success"><strong>{{rental.totalPrice |currency}} </strong>Pay</button>
+    </div>
+</div>
+</div>

@@ -1,53 +1,54 @@
-<!-- <div *ngIf="dataLoad==false" class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-<table *ngIf="dataLoad==true" class="table">
-    <thead class="thead-dark">
-      <br>
-      <br>
-      <br>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Brand Name</th>
-        <th scope="col">Color Name</th>
-        <th scope="col">Model Year</th>
-        <th scope="col">Daily Price</th>
-        <th scope="col">Description</th>
-        <th scope="col">Details</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let car of cars">
-      <tr>
-        <td>{{car.carId}}</td>
-        <td>{{car.brandName}}</td>
-        <td>{{car.colorName}}</td>
-        <td>{{car.modelYear}}</td>
-        <td>{{car.dailyPrice}}</td>
-        <td>{{car.description}}</td>
-        <td><button type="button" routerLink="/car-detail/{{car.carId}}" class="btn btn-primary">Details</button></td>
-      </tr>
-    </tbody>
-  </table>
- -->
- <div class="text-center"><strong>Cars</strong></div>
-<div *ngIf="dataLoad==false" class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
+<div class="mb-3">
+  <label for="filterText" class="form-label">Search Car</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="search phrase">
+</div>
+<div *ngIf="filterText" class="alert alert-dark">
+You called : {{filterText}}
+</div>
+<div class="text-center"><strong>Cars</strong></div>
+<br>
+<app-car-filter></app-car-filter>
+<br>
+<div *ngIf="dataLoad == false" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
 </div>
 <div class="row">
-    <div *ngFor="let car of cars" class="card" style="width: 17rem;">
-        <div>
-            <img *ngIf="car.imagePath==null" src="https://localhost:44302//Images/logo.jpg" alt="{{car.carId}}" class="card-img-top" width="320" height="200">
-            <img *ngIf="car.imagePath!=null" src="{{baseImagePath+car.imagePath}}" alt="{{car.carId}}" class="card-img-top" width="320" height="200">
-        </div>
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Brand: {{car.brandName}}</li>
-                <li class="list-group-item">Model Year: {{car.modelYear}}</li>
-                <li class="list-group-item">Daily Price: {{car.dailyPrice}} $</li>
-            </ul>
-            <section style="float:left">
-                <button routerLink="/car-detail/{{car.carId}}" type="button" class="btn btn-primary">Detaylar</button>
-            </section>
-        </div>
+  <div *ngFor="let car of cars | carFilter:filterText" class="card" style="width: 17rem">
+    <div>
+      <img
+        *ngIf="car.imagePath == null"
+        src="https://localhost:44302//Images/logo.jpg"
+        alt="{{ car.carId }}"
+        class="card-img-top"
+        width="320"
+        height="200"
+      />
+      <img
+        *ngIf="car.imagePath != null"
+        src="{{ baseImagePath + car.imagePath }}"
+        alt="{{ car.carId }}"
+        class="card-img-top"
+        width="320"
+        height="200"
+      />
     </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Brand: {{ car.brandName | uppercase }}</li>
+        <li class="list-group-item">Model Year: {{ car.modelYear }}</li>
+        <li class="list-group-item">
+          Daily Price: {{ car.dailyPrice | currency }}
+        </li>
+      </ul>
+      <section style="float: left">
+        <button
+          routerLink="/car-detail/{{ car.carId }}"
+          type="button"
+          class="btn btn-primary"
+        >
+          Details
+        </button>
+      </section>
+    </div>
+  </div>
 </div>

@@ -24,9 +24,6 @@ export class CarDetailComponent implements OnInit {
         this.getImagesById(params["carId"])
         
       }
-      else{
-        console.log("çalışmadı")
-      }
     })
     
   }

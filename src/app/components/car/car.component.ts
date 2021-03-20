@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarService } from 'src/app/services/car.service';
@@ -16,14 +17,18 @@ export class CarComponent implements OnInit {
   dataLoad=false;
   carImageDefault:"https://localhost:44302//Images/logo.jpg";
   baseImagePath = environment.baseImageUrl;
-  constructor(private carService:CarService,private activatedRoute:ActivatedRoute,private carDetailService:CarDetailService) { }
+  filterText:"";
+  constructor(private carService:CarService,private activatedRoute:ActivatedRoute,private carDetailService:CarDetailService
+    ,private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
-      if (params["brandId"]) {
-        this.getCarsByBrand(params["brandId"])
+      if (params["brandId"] && params["colorId"]) {
+        this.getCarByBrandAndColor(params["brandId"],params["colorId"])  
       }else if (params["colorId"]) {
         this.getCarsByColor(params["colorId"])
+      }else if (params["brandId"]) {
+        this.getCarsByBrand(params["brandId"])
       }
       else{
         this.getCars();
@@ -54,6 +59,18 @@ export class CarComponent implements OnInit {
       if (response.success==true) {
         this.cars=response.data;
         this.dataLoad=true;
+      }
+    })
+  }
+
+  getCarByBrandAndColor(brandId:number,colorId:number){
+    this.carService.getCarByBrandAndColor(brandId,colorId).subscribe(response=>{
+      if (response.success==true) {
+        this.cars=response.data;
+        this.dataLoad=true;
+        if(this.cars.length == 0){
+          this.toastrService.info('There is no vehicle for search result.', 'Search Result');
+        }
       }
     })
   }
