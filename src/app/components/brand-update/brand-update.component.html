@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Brand Update</h5></div>
+      <div class="card-body">
+        <form [formGroup]="brandUpdateForm">
+          <div class="mb-3">
+            <label for="brandId">Brand Id</label>
+            <div class="form-group">
+              <input
+                type="number"
+                id="brandId"
+                formControlName="brandId"
+                class="form-control"
+                placeholder="Brand Id"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="brandId">Brand Name</label>
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="brandName"
+                  formControlName="brandName"
+                  class="form-control"
+                  placeholder="Brand Name"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        style="float: right"
+        class="btn btn-fill btn-success"
+        (click)="update()"
+      >
+        Update
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let brand of brands ">
+      <td>{{ brand.brandId }}</td>
+      <td>{{ brand.brandName }}</td>
+    </tr>
+  </tbody>
+</table>

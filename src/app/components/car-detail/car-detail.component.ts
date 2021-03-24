@@ -11,7 +11,6 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car-detail.component.css']
 })
 export class CarDetailComponent implements OnInit {
-
   photos:CarImage[]=[]
   carDetail:Car[]=[];
   imageUrl="https://localhost:44302/";

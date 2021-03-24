@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Brand Add</h5></div>
+      <div class="card-body">
+        <form [formGroup]="brandAddForm"> 
+          <div class="mb-3">
+            <label for="brandName">Brand Name</label>
+            <div class="form-group">
+              <input
+                type="text"
+                id="brandName"
+                formControlName="brandName"
+                class="form-control"
+                placeholder="Brand name"
+              />
+              <div  *ngIf="errorMessages">
+                <label class="text-danger" *ngFor="let errorMessage of errorMessages">{{errorMessage}}</label>
+              </div>
+              
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button style="float:right;" class="btn btn-fill btn-success" (click)="add()" >Add</button>
+      </div>
+    </div>
+  </div>
+</div>

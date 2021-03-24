@@ -69,6 +69,9 @@ export class RentalComponent implements OnInit {
       else{
          this.toastrService.error("Rental not added","Rental Error")
       }
+    },responseError=>{
+      console.log(responseError.error)
+      this.toastrService.error("Rental not added","Rental Error")
     });
   }
 

@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header"><h5 class="title">Car Add</h5></div>
+      <div class="card-body">
+        <form [formGroup]="carAddForm">
+          <div class="mb-3">
+            <label for="brandId" class="col-sm-2 col-form-label"
+              >Select Brand:</label
+            >
+            <select class="form-select" formControlName="brandId" aria-label="Default select example">
+              <option *ngFor="let brand of brands" [ngValue]="brand.brandId">
+                {{ brand.brandName }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="colorId" class="col-sm-2 col-form-label"
+              >Select Color:</label
+            >
+            <select class="form-select" formControlName="colorId">
+              <option *ngFor="let color of colors" [ngValue]="color.colorId">
+                {{ color.colorName }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="modelYear">Model Year</label>
+            <input
+              type="text"
+              id="modelYear"
+              formControlName="modelYear"
+              class="form-control"
+              placeholder="Model Year"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="dailyPrice">Daily Price</label>
+            <input
+              type="number"
+              id="dailyPrice"
+              formControlName="dailyPrice"
+              class="form-control"
+              placeholder="Daily Price"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              formControlName="description"
+              class="form-control"
+              placeholder="Description"
+            />
+          </div>
+
+          <!-- <div *ngIf="errorMessages">
+            <label
+              class="text-danger"
+              *ngFor="let errorMessage of errorMessages"
+              >{{ errorMessage }}<br
+            /></label>
+          </div> -->
+        </form>
+      </div>
+      <div class="card-footer">
+        <button
+          style="float: right"
+          class="btn btn-fill btn-success"
+          (click)="add()"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
