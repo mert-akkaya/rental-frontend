@@ -49,11 +49,32 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Brand : {{ car.brandName }}</li>
             <li class="list-group-item">Color : {{ car.colorName }}</li>
-            <li class="list-group-item">Daily Price : {{ car.dailyPrice | currency }}</li>
+            <li class="list-group-item">
+              Daily Price : {{ car.dailyPrice | currency }}
+            </li>
             <li class="list-group-item">Description : {{ car.description }}</li>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-              Rental
+            <li class="list-group-item">
+              Findex Point : {{ car.findexPoint }}
+            </li>
+            <button
+              type="button"
+              [class]="getRentalButtonClass()"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              Rental {{ (message) }}
             </button>
+            <br />
+
+            <button *ngIf="isCustomer==false"
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              Be Customer
+            </button>
+            <app-customer></app-customer>
           </ul>
         </blockquote>
       </div>

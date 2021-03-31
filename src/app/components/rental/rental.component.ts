@@ -5,6 +5,7 @@ import { Car } from 'src/app/models/car';
 import { Customer } from 'src/app/models/customer';
 import { CustomerDetail } from 'src/app/models/customer-detail';
 import { Rental } from 'src/app/models/rental';
+import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -17,20 +18,21 @@ export class RentalComponent implements OnInit {
 
   rentals:Rental[]=[]
   customerDetails:CustomerDetail[]
-  customers:Customer[]
+  customer:Customer
   customerId:number 
   dataLoad=false
   rentStartDate:Date;
   rentFinishDate:Date;
-  success:Boolean=false;
+  isCustomer=true;
   @Input() car:Car;
   constructor(private rentalService:RentalService,private customerService:CustomerService,private toastrService:ToastrService
-    ,private router:Router) { }
+    ,private router:Router,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.getRental();
     this.getCustomerDetail();
-    this.getCustomer();
+    // this.getCustomerById();
+    this.getcustomerByUserId();
   }
 
   getRental(){
@@ -41,10 +43,23 @@ export class RentalComponent implements OnInit {
       }
     })
   }
-  getCustomer(){
-    this.customerService.getCustomers().subscribe(response=>{
-      this.customers=response.data
-    })
+
+  // getCustomerById(){
+  //   if (this.customerId) {
+  //     this.customerService.getCustomerById(this.customerId).subscribe(response=>{
+  //       this.customer= response.data
+  //     })
+  //   }
+    
+  //}
+  getcustomerByUserId(){
+    let userId = this.authService.getUserId();
+    this.customerService.getCustomerByUserId(userId).subscribe(response=>{
+    this.customerId = response.data.id
+    },responseError=>{
+      this.isCustomer=false
+     // this.toastrService.error("You are not customer pls go customer add page")
+    })     
   }
   getCustomerDetail(){
     this.customerService.getCustomerDetails().subscribe(response=>{
@@ -56,7 +71,7 @@ export class RentalComponent implements OnInit {
   addRental(){
     let rental : Rental={
       carId : this.car.carId,
-      customerId:parseInt(this.customerId.toString()),
+      customerId:this.customerId,
       rentDate:this.rentStartDate,
       returnDate:this.rentFinishDate,
       totalPrice:this.calculatePrice() ,
@@ -65,13 +80,15 @@ export class RentalComponent implements OnInit {
       if (response.success==true) {
         this.toastrService.success("Rental added you are being redirected","Rental")
         this.router.navigate(['/payment',JSON.stringify(rental)]);
+      }else if (this.isCustomer==false) {
+        this.toastrService.error("You are not customer");
       }
       else{
          this.toastrService.error("Rental not added","Rental Error")
       }
     },responseError=>{
       console.log(responseError.error)
-      this.toastrService.error("Rental not added","Rental Error")
+      this.toastrService.error(responseError.error.message,"Rental Error")
     });
   }
 
