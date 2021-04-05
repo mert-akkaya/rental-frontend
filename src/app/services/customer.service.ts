@@ -43,4 +43,8 @@ export class CustomerService {
     let newPath= environment.apiUrl+"customers/add";
     return this.httpClient.post<ResponseModel>(newPath,customer);
   }
+  updateCustomer(customer:Customer):Observable<ResponseModel>{
+    let newPath= environment.apiUrl+"customers/update";
+    return this.httpClient.post<ResponseModel>(newPath,customer);
+  }
 }

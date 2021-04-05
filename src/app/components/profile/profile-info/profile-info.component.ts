@@ -41,7 +41,6 @@ export class ProfileInfoComponent implements OnInit {
   getUserById(){
     this.userService.getById(this.userId).subscribe(response=>{
     this.user = response.data;
-    console.log(this.user)
     })
   }
 

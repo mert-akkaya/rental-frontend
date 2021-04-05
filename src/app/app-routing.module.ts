@@ -12,7 +12,10 @@ import { CarComponent } from './components/car/car.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { ProfileCompanyComponent } from './components/profile/profile-company/profile-company.component';
+import { ProfileFindexComponent } from './components/profile/profile-findex/profile-findex.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
+import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RentalComponent } from './components/rental/rental.component';
 import { LoginGuard } from './guards/login.guard';
@@ -34,7 +37,10 @@ const routes: Routes = [
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
   {path:"profile",component:ProfileComponent,children: [
-    {path: 'info', component: ProfileInfoComponent},
+    {path:"info", component: ProfileInfoComponent},
+    {path:"company",component:ProfileCompanyComponent},
+    {path:"findex",component:ProfileFindexComponent},
+    {path:"password",component:ProfilePasswordComponent}
   ]},
 
 ];

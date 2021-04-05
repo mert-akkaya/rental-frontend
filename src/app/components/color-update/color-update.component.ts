@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder,FormControl,FormGroup,Validator, Validators} from '@angular/forms';
+import {FormBuilder,FormControl,FormGroup, Validators} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Color } from 'src/app/models/color';
 import { ColorService } from 'src/app/services/color.service';

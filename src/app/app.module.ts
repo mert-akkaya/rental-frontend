@@ -36,6 +36,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { ProfileMenuComponent } from './components/profile/profile-menu/profile-menu.component';
 import { ProfileCompanyComponent } from './components/profile/profile-company/profile-company.component';
+import { ProfileFindexComponent } from './components/profile/profile-findex/profile-findex.component';
+import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
 
 
 @NgModule({
@@ -64,7 +66,9 @@ import { ProfileCompanyComponent } from './components/profile/profile-company/pr
     ProfileComponent,
     ProfileInfoComponent,
     ProfileMenuComponent,
-    ProfileCompanyComponent
+    ProfileCompanyComponent,
+    ProfileFindexComponent,
+    ProfilePasswordComponent
   ],
   imports: [
     BrowserModule,
