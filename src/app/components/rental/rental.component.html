@@ -25,47 +25,47 @@
 <!-- Vertically centered modal -->
 
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Rental Page</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Car Id: <input type="text" class="form-control" [value]="car.carId" disabled>
-        Brand: <input type="text" class="form-control" [value]="car.brandName" disabled>
-        Color: <input type="text" class="form-control" [value]="car.colorName" disabled>
-        Daily Price: <input type="text" class="form-control" [value]="car.dailyPrice"  disabled>
-        <label for="example-date-input"
-            >Start Date</label
-          >
-          <div class="col-md-6">
-            <input
-              class="form-control"
-              min="{{ getRentMinDate() }}"
-              value="{{ getRentMinDate() }}"
-              type="date"
-              [(ngModel)]="rentStartDate"
-            />
-            
-          </div>
-          <label for="example-date-input" 
-            >Finish Date</label>
-          <div class="col-md-6">
-            <input
-              class="form-control"
-              type="date"
-              min="{{ getReturnMinDate() }}"
-              value="{{ getReturnMinDate() }}"
-              [(ngModel)]="rentFinishDate"
-            />
-          Total Price  <input *ngIf="rentFinishDate" type="text" class="form-control" [value]="calculatePrice() | currency" disabled>
-      </div>
-      <div class="modal-footer">
-        <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button  (click)="addRental()" type="button" class="btn btn-primary ">Rental</button>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Rental Page</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Car Id: <input type="text" class="form-control" [value]="car.carId" disabled>
+          Brand: <input type="text" class="form-control" [value]="car.brandName" disabled>
+          Color: <input type="text" class="form-control" [value]="car.colorName" disabled>
+          Daily Price: <input type="text" class="form-control" [value]="car.dailyPrice"  disabled>
+          <label for="example-date-input"
+              >Start Date</label
+            >
+            <div class="col-md-6">
+              <input
+                class="form-control"
+                min="{{ getRentMinDate() }}"
+                value="{{ getRentMinDate() }}"
+                type="date"
+                [(ngModel)]="rentStartDate"
+              />
+              
+            </div>
+            <label for="example-date-input" 
+              >Finish Date</label>
+            <div class="col-md-6">
+              <input
+                class="form-control"
+                type="date"
+                min="{{ getReturnMinDate() }}"
+                value="{{ getReturnMinDate() }}"
+                [(ngModel)]="rentFinishDate"
+              />
+            Total Price  <input *ngIf="rentFinishDate" type="text" class="form-control" [value]="calculatePrice() | currency" disabled>
+        </div>
+        <div class="modal-footer">
+          <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button data-bs-dismiss="modal" (click)="addRental()" type="button" class="btn btn-primary ">Rental</button>
+        </div>
       </div>
     </div>
   </div>
-</div>

@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "bootstrap": "^5.0.0-beta2",
     "jquery": "^3.6.0",
+    "ngx-mask": "^11.1.5",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
     "toastr": "^2.1.4",

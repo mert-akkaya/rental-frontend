@@ -4,6 +4,7 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {JwtModule} from '@auth0/angular-jwt';
+import { NgxMaskModule,IConfig} from 'ngx-mask'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -79,6 +80,7 @@ import { ProfilePasswordComponent } from './components/profile/profile-password/
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }),
+    NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
     JwtModule
   ],

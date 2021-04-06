@@ -23,11 +23,12 @@ export class PaymentComponent implements OnInit {
   rental:Rental;
   cars:Car[];
   cartNumber:string
-  cvv:number
+  cvv:string
   customer:CustomerDetail
+  cartName:string
+  lastUsingDate:string
 
   ngOnInit(): void {
-   
     this.activatedRoute.params.subscribe(params=>{
       if(params["rental"]){
         this.rental = JSON.parse(params['rental']);
@@ -35,6 +36,7 @@ export class PaymentComponent implements OnInit {
       }
     })
   }
+  
 
   getCar(){
     this.carService.getCarsById(this.rental.carId).subscribe(response=>{
@@ -49,19 +51,24 @@ export class PaymentComponent implements OnInit {
   }
 
   addPayment(){
+    let mounth=this.lastUsingDate.substring(0,2)
+    let year=this.lastUsingDate.substring(2,4)
+    let newDate = mounth.concat("/",year) 
     let payment :Payment={
       customerId:this.rental.customerId,
       cartNumber:this.cartNumber,
-      cartCvv:this.cvv,
-      price:this.rental.totalPrice
+      cartCvv:parseInt(this.cvv),
+      price:this.rental.totalPrice,
+      cartName:this.cartName,
+      cartDate:newDate
     };
     this.paymentService.addPayment(payment).subscribe(response=>{
-      console.log(payment)
       if (response.success) {
         this.toastrService.success("Pay success","Pay")
         this.router.navigate(['']);
       }
     })
   }
+  
 
 }

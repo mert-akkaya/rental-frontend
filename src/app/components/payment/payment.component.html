@@ -36,14 +36,14 @@
     <strong>Payment</strong>
   </div>
   <div class="card-body">
+    <div class="container">
     <div class="row">
-      <div class="inputbox mt-3">
+      <!-- <div class="inputbox mt-3">
         <span>Customer Name</span>
-        <input type="text" class="form-control" [value]="rental.carId" disabled>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="inputbox mt-3 mr-2">
+        <input type="text" class="form-control" [value]="rental.customerId" disabled>
+      </div> -->
+        <div class="col-md-10">
+          <i class="fa fa-credit-card"></i>
             <span>Cart Number</span>
             <input
             [(ngModel)]="cartNumber"
@@ -51,27 +51,56 @@
               name="name"
               class="form-control"
               required="required"
+              mask="XXXX-XXXX-XXXX-XXXX"
+              placeholder="XXXX-XXXX-XXXX-XXXX "
             />
-            <i class="fa fa-credit-card"></i>
-          </div>
         </div>
         <div class="col-md-6">
+            <div class="inputbox mt-3 mr-2">
+              <span>Cart Owner Name</span>
+              <input
+              [(ngModel)]="cartName"
+                type="text"
+                name="name"
+                class="form-control"
+                required="required"
+              />
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex flex-row">
+            <div class="inputbox mt-3 mr-2">
+              <span>Last Using Date</span>
+              <input
+              [(ngModel)]="lastUsingDate"
+                type="datetime"
+                name="name"
+                class="form-control"
+                required="required"
+                placeholder="ex:08/21"
+                mask="00/00"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
           <div class="d-flex flex-row">
             <div class="inputbox mt-3 mr-2">
               <span>CVV</span>
               <input
               [(ngModel)]="cvv"
-                type="number"
+                type="text"
                 name="name"
                 class="form-control"
                 required="required"
+                mask="000"
               />
             </div>
           </div>
         </div>
-      </div>
     </div>
-    
+  </div>
+
   </div>
   <div class="card-footer">
     <div class="row">
