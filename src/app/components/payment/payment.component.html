@@ -59,7 +59,7 @@
             <div class="inputbox mt-3 mr-2">
               <span>Cart Owner Name</span>
               <input
-              [(ngModel)]="cartName"
+              [(ngModel)]="cartOwnerName"
                 type="text"
                 name="name"
                 class="form-control"
@@ -98,13 +98,23 @@
             </div>
           </div>
         </div>
+        <div class="inputbox mt-3 mr-2">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck"
+                [(ngModel)]="isSave">
+            <label class="form-check-label" for="gridCheck">
+                Kart bilgilerimi hatırla
+            </label>
+        </div>
+        </div>
+        
     </div>
   </div>
 
   </div>
   <div class="card-footer">
     <div class="row">
-        <button (click)="addPayment()" class="btn btn-success"><strong>{{rental.totalPrice |currency}} </strong>Pay</button>
+        <button (click)="saveCartAndPay()" class="btn btn-success"><strong>{{rental.totalPrice |currency}} </strong>Pay</button>
     </div>
 </div>
 </div>

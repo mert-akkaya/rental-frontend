@@ -1,6 +1,5 @@
-export interface Payment{
+export interface SavedCreditCart{
     id?:number;
     customerId:number;
     cartId:number;
-    price:number;
 }
