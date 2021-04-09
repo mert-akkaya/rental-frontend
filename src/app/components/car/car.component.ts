@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
@@ -19,7 +20,7 @@ export class CarComponent implements OnInit {
   baseImagePath = environment.baseImageUrl;
   filterText:"";
   constructor(private carService:CarService,private activatedRoute:ActivatedRoute,private carDetailService:CarDetailService
-    ,private toastrService:ToastrService) { }
+    ,private toastrService:ToastrService,private authService:AuthService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
@@ -75,4 +76,12 @@ export class CarComponent implements OnInit {
     })
   }
 
+  checkIfLogin(){
+    if (this.authService.isAuthenticated()) {
+      return true
+    }else{
+      return false
+    }
+  }
+  
 }

@@ -50,7 +50,7 @@ You called : {{filterText}}
         </button>
       </section>
       <section style="float: right">
-        <button
+        <button *ngIf="checkIfLogin()"
           routerLink="/cars/update/{{ car.carId }}"
           type="button"
           class="btn btn-primary"

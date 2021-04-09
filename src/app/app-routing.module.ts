@@ -13,6 +13,7 @@ import { ColorAddComponent } from './components/color-add/color-add.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { ProfileCompanyComponent } from './components/profile/profile-company/profile-company.component';
+import { ProfileCreditCartComponent } from './components/profile/profile-credit-cart/profile-credit-cart.component';
 import { ProfileFindexComponent } from './components/profile/profile-findex/profile-findex.component';
 import { ProfileInfoComponent } from './components/profile/profile-info/profile-info.component';
 import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
@@ -40,7 +41,8 @@ const routes: Routes = [
     {path:"info", component: ProfileInfoComponent},
     {path:"company",component:ProfileCompanyComponent},
     {path:"findex",component:ProfileFindexComponent},
-    {path:"password",component:ProfilePasswordComponent}
+    {path:"password",component:ProfilePasswordComponent},
+    {path:"my-carts",component:ProfileCreditCartComponent}
   ]},
 
 ];

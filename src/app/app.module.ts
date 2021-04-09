@@ -39,6 +39,7 @@ import { ProfileMenuComponent } from './components/profile/profile-menu/profile-
 import { ProfileCompanyComponent } from './components/profile/profile-company/profile-company.component';
 import { ProfileFindexComponent } from './components/profile/profile-findex/profile-findex.component';
 import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
+import { ProfileCreditCartComponent } from './components/profile/profile-credit-cart/profile-credit-cart.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ProfilePasswordComponent } from './components/profile/profile-password/
     ProfileMenuComponent,
     ProfileCompanyComponent,
     ProfileFindexComponent,
-    ProfilePasswordComponent
+    ProfilePasswordComponent,
+    ProfileCreditCartComponent
   ],
   imports: [
     BrowserModule,

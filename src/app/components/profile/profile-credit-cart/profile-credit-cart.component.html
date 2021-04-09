@@ -1,0 +1,20 @@
+<div
+  class="card"
+  *ngFor="let savedCreditCart of savedCreditCarts"
+  style="text-align: center"
+>
+  <h5 class="card-title">Your saved Cart</h5>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">
+      Cart Owner Name : {{ savedCreditCart.cartOwnerName }}
+    </h6>
+    <p class="card-text">
+      Cart Number : {{ savedCreditCart.cartNumber }}
+      <br />
+      Cart Date : {{ savedCreditCart.cartDate }}<br />
+      Cart Cvv : {{ savedCreditCart.cartCvv }}
+    </p>
+  </div>
+  <button class="btn btn-primary" (click)="setCurrentCart(savedCreditCart)" (click)="deleteCart()">Delete</button>
+</div>
+

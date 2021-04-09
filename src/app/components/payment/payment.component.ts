@@ -32,13 +32,16 @@ export class PaymentComponent implements OnInit {
   cartOwnerName:string
   lastUsingDate:string
   isSave:boolean=false
-  creditCart:CreditCart
+  creditCartModel:CreditCart
+  savedCreditCarts:CreditCart[]
+  currentCreditCart:CreditCart
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
       if(params["rental"]){
         this.rental = JSON.parse(params['rental']);
         this.getCar()
+        this.getSavedCreditCarts()
       }
     })
   }
@@ -50,9 +53,15 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  getCustomer(id:number){
+   getCustomer(id:number){
     this.customerService.getCustomerDetailsById(id).subscribe(response=>{
      this.customer=response.data
+    })
+  }
+  
+   getSavedCreditCarts(){
+    this.savedCreditCartService.getSavedCreditCarts(this.rental.customerId).subscribe(response=>{
+      this.savedCreditCarts = response.data
     })
   }
 
@@ -70,16 +79,16 @@ export class PaymentComponent implements OnInit {
     this.creditCartService.save(creditCart).subscribe(response=>{
       if (response.success) {
         this.creditCartService.find(creditCart.cartNumber).subscribe(response=>{
-          this.creditCart = response.data 
+          this.creditCartModel = response.data 
           let payment :Payment={
             customerId:this.rental.customerId,
-            cartId:this.creditCart.id,
+            cartId:this.creditCartModel.cartId,
             price:this.rental.totalPrice
           }
           if (this.isSave==true) {
             let savedCreditCart:SavedCreditCart={
               customerId:this.rental.customerId,
-              cartId:this.creditCart.id
+              cartId:this.creditCartModel.cartId
             }
             this.savedCreditCartService.save(savedCreditCart).subscribe(response=>{
               if (response.success) {
@@ -89,7 +98,7 @@ export class PaymentComponent implements OnInit {
           }
           this.paymentService.addPayment(payment).subscribe(response=>{
             if (response.success) {
-              this.toastrService.success("Pay success","Pay")
+              this.toastrService.success("Payment success","Pay")
               this.router.navigate(['']);
             }
           })
@@ -99,17 +108,18 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-
-//   addPayment(){
-//       this.paymentService.addPayment(payment).subscribe(response=>{
-//       if (response.success) {
-//         this.toastrService.success("Pay success","Pay")
-//         console.log("ödendi")
-//         this.customerService.getCustomerById(payment.customerId).subscribe(response=>{
-//           console.log(response.data.companyName)
-//         })
-//         // this.router.navigate(['']);
-//       }
-//     })
-// }
+  payBySavedCart(){
+    let paymentModel:Payment = {
+      customerId:this.rental.customerId,
+      cartId:this.currentCreditCart.cartId, 
+      price:this.rental.totalPrice
+    }
+    this.paymentService.addPayment(paymentModel).subscribe(response=>{
+      this.toastrService.success("Payment Succes","Pay")
+      this.router.navigate(['']);
+    })
+  }
+  setCurrentCart(cart:CreditCart){
+    this.currentCreditCart = cart
+  }
 }

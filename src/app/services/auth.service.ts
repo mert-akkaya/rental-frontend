@@ -18,8 +18,10 @@ export class AuthService {
   userName:string;
   email:string
   userId:number
+  roles:string
   jwtHelper:JwtHelperService = new JwtHelperService();
-  constructor(private httpClient:HttpClient,private localStorageService:LocalStorageService) { 
+  constructor(private httpClient:HttpClient,private localStorageService:LocalStorageService
+    ) { 
     this.setUserInfo();
     this.getUserId();
   }
@@ -57,11 +59,17 @@ export class AuthService {
     var id = Object.keys(decoded).filter(x=>x.endsWith("/nameidentifier"))[0];
     this.userId = Number(decoded[id]);
   }
+  setUserRole(){
+    var decoded = this.decodeToken();
+    var role = Object.keys(decoded).filter(x=>x.endsWith("role"))[0];
+    this.roles = decoded[role];
+  }
    setUserInfo(){
     if (this.isAuthenticated()) {
       this.setUserName()
       this.setEmail();
       this.setUserId();
+      this.setUserRole();
     }
   }
 
@@ -73,6 +81,9 @@ export class AuthService {
   }
   getEmail(){
     return this.email
+  }
+  getRoles(){
+    return this.roles
   }
 
   logOut(){
@@ -87,8 +98,6 @@ export class AuthService {
         return null;
     }
   }
- 
-  
 
 
 }

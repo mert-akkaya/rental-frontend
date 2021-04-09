@@ -1,120 +1,157 @@
-<div class="card mt-4">
-    <div class="card-header text-center">
-      <strong>Details</strong>
-    </div>
-    <div class="card-body">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Start Date</th>
-            <th>Finis Date</th>
-            <th>Brand</th>
-            <th>Color</th>
-            <th>Model Year</th>
-            <th>Daily Price</th>
-            <th>Total Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let car of cars">
-            <td>{{rental.rentDate}}</td>
-            <td>{{rental.returnDate}}</td>
-            <td>{{car.brandName}}</td>
-            <td>{{car.colorName}}</td>
-            <td>{{car.modelYear}}</td>
-            <td>{{car.dailyPrice | currency}}</td>
-            <td><strong class="text-danger">{{rental.totalPrice | currency:"₺"}}</strong></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-  </div>
-
-  <div class="card mt-4">
-  <div class="card-header text-center">
-    <strong>Payment</strong>
-  </div>
-  <div class="card-body">
-    <div class="container">
-    <div class="row">
-      <!-- <div class="inputbox mt-3">
-        <span>Customer Name</span>
-        <input type="text" class="form-control" [value]="rental.customerId" disabled>
-      </div> -->
-        <div class="col-md-10">
-          <i class="fa fa-credit-card"></i>
-            <span>Cart Number</span>
-            <input
-            [(ngModel)]="cartNumber"
-              type="text"
-              name="name"
-              class="form-control"
-              required="required"
-              mask="XXXX-XXXX-XXXX-XXXX"
-              placeholder="XXXX-XXXX-XXXX-XXXX "
-            />
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mt-4">
+        <div class="card-header text-center">
+          <strong>Details</strong>
         </div>
-        <div class="col-md-6">
-            <div class="inputbox mt-3 mr-2">
-              <span>Cart Owner Name</span>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Start Date</th>
+                <th>Finis Date</th>
+                <th>Brand</th>
+                <th>Color</th>
+                <th>Model Year</th>
+                <th>Daily Price</th>
+                <th>Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let car of cars">
+                <td>{{ rental.rentDate }}</td>
+                <td>{{ rental.returnDate }}</td>
+                <td>{{ car.brandName }}</td>
+                <td>{{ car.colorName }}</td>
+                <td>{{ car.modelYear }}</td>
+                <td>{{ car.dailyPrice | currency }}</td>
+                <td>
+                  <strong class="text-danger">{{
+                    rental.totalPrice | currency: "₺"
+                  }}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <br>
+   
+    <div
+      class="card"
+      *ngFor="let savedCreditCart of savedCreditCarts"
+      style="text-align: center;"
+    >
+    <h5 *ngIf="savedCreditCart.cartOwnerName" class="card-title">Your saved Cart</h5>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">
+          Cart Owner Name : {{ savedCreditCart.cartOwnerName }}
+        </h6>
+        <p class="card-text">
+          Cart Number : {{ savedCreditCart.cartNumber }}
+          <br>
+          Cart Date : {{ savedCreditCart.cartDate }}<br />
+          Cart Cvv : {{ savedCreditCart.cartCvv }}
+        </p>
+        <!-- <button class="btn btn-primary" (click)="setCurrentCart(savedCreditCart)">Choose</button> -->
+        <button class="btn btn-primary" (click)="setCurrentCart(savedCreditCart) "(click)="payBySavedCart()">Pay</button>
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card mt-4" >
+      <div class="card-header text-center">
+        <strong>Payment</strong>
+      </div>
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10">
+              <i class="fa fa-credit-card"></i>
+              <span>Cart Number</span>
               <input
-              [(ngModel)]="cartOwnerName"
+                [(ngModel)]="cartNumber"
                 type="text"
                 name="name"
                 class="form-control"
                 required="required"
+                mask="XXXX-XXXX-XXXX-XXXX"
+                placeholder="XXXX-XXXX-XXXX-XXXX "
               />
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="d-flex flex-row">
+            </div>
+            <div class="col-md-6">
+              <div class="inputbox mt-3 mr-2">
+                <span>Cart Owner Name</span>
+                <input
+                  [(ngModel)]="cartOwnerName"
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  required="required"
+                />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="d-flex flex-row">
+                <div class="inputbox mt-3 mr-2">
+                  <span>Last Using Date</span>
+                  <input
+                    [(ngModel)]="lastUsingDate"
+                    type="datetime"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    placeholder="ex:08/21"
+                    mask="00/00"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="d-flex flex-row">
+                <div class="inputbox mt-3 mr-2">
+                  <span>CVV</span>
+                  <input
+                    [(ngModel)]="cvv"
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    required="required"
+                    mask="000"
+                  />
+                </div>
+              </div>
+            </div>
             <div class="inputbox mt-3 mr-2">
-              <span>Last Using Date</span>
-              <input
-              [(ngModel)]="lastUsingDate"
-                type="datetime"
-                name="name"
-                class="form-control"
-                required="required"
-                placeholder="ex:08/21"
-                mask="00/00"
-              />
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="gridCheck"
+                  [(ngModel)]="isSave"
+                />
+                <label class="form-check-label" for="gridCheck">
+                  Kart bilgilerimi hatırla
+                </label>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="d-flex flex-row">
-            <div class="inputbox mt-3 mr-2">
-              <span>CVV</span>
-              <input
-              [(ngModel)]="cvv"
-                type="text"
-                name="name"
-                class="form-control"
-                required="required"
-                mask="000"
-              />
-            </div>
-          </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <button (click)="saveCartAndPay()" class="btn btn-success">
+            <strong>{{ rental.totalPrice | currency }} </strong>Pay
+          </button>
         </div>
-        <div class="inputbox mt-3 mr-2">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck"
-                [(ngModel)]="isSave">
-            <label class="form-check-label" for="gridCheck">
-                Kart bilgilerimi hatırla
-            </label>
-        </div>
-        </div>
-        
+      </div>
     </div>
   </div>
+</div>
 
-  </div>
-  <div class="card-footer">
-    <div class="row">
-        <button (click)="saveCartAndPay()" class="btn btn-success"><strong>{{rental.totalPrice |currency}} </strong>Pay</button>
-    </div>
-</div>
-</div>
+

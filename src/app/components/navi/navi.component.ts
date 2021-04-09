@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,15 +12,17 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NaviComponent implements OnInit {
 
-  user:User
+  user:User 
   userId:number;
   isAuthenticated:boolean
-  constructor(private authService:AuthService,private userService:UserService,private toastrService:ToastrService,
+  constructor(public authService:AuthService,private userService:UserService,private toastrService:ToastrService,
     private router:Router) {}
 
   ngOnInit(): void {
     if (this.checkIfLogin()) {
+      this.getUserId();
       this.getUserById();
+      
     }
   }
 
@@ -33,8 +34,12 @@ export class NaviComponent implements OnInit {
     }
   }
 
+  getUserId(){
+   this.userId =  this.userService.getUserId()
+  }
+
   getUserById() {
-    this.userService.getById(this.userService.getUserId()).subscribe((response) => {
+    this.userService.getById(this.userId).subscribe((response) => {
       this.user = response.data;
     });
   }
