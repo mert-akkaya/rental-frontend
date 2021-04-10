@@ -47,7 +47,7 @@ export class NaviComponent implements OnInit {
   logOut(){
     this.authService.logOut();
     this.toastrService.info("Log out success")
-     this.router.navigate([""])
+     this.router.navigate([""])    
   }
   
 

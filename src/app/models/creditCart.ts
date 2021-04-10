@@ -1,6 +1,6 @@
 export interface CreditCart{
-    cartId?:number;
     id?:number;
+    savedCreditCartId?:number;
     customerId:number;
     cartOwnerName:string;
     cartNumber:string;

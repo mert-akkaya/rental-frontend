@@ -19,6 +19,7 @@ export class CarComponent implements OnInit {
   carImageDefault:"https://localhost:44302//Images/logo.jpg";
   baseImagePath = environment.baseImageUrl;
   filterText:"";
+  nullCar:boolean=false
   constructor(private carService:CarService,private activatedRoute:ActivatedRoute,private carDetailService:CarDetailService
     ,private toastrService:ToastrService,private authService:AuthService) { }
 
@@ -51,6 +52,10 @@ export class CarComponent implements OnInit {
       if (response.success==true) {
         this.cars=response.data;
         this.dataLoad=true;
+        this.nullCar=false
+        if (this.cars.length<1) {
+          this.nullCar=true
+       }
       }
     })
   }
@@ -60,6 +65,10 @@ export class CarComponent implements OnInit {
       if (response.success==true) {
         this.cars=response.data;
         this.dataLoad=true;
+        this.nullCar=false
+        if (this.cars.length<1) {
+          this.nullCar=true
+       }
       }
     })
   }

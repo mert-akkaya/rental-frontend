@@ -77,18 +77,21 @@ export class PaymentComponent implements OnInit {
       cartDate:newDate
     }
     this.creditCartService.save(creditCart).subscribe(response=>{
+      console.log(creditCart)
       if (response.success) {
-        this.creditCartService.find(creditCart.cartNumber).subscribe(response=>{
-          this.creditCartModel = response.data 
+        this.creditCartService.find(this.cartNumber).subscribe(response=>{
+          this.creditCartModel = response.data
+          console.log(this.creditCartModel)
           let payment :Payment={
             customerId:this.rental.customerId,
-            cartId:this.creditCartModel.cartId,
+            cartId:this.creditCartModel.id,
             price:this.rental.totalPrice
           }
+          console.log(payment)
           if (this.isSave==true) {
             let savedCreditCart:SavedCreditCart={
               customerId:this.rental.customerId,
-              cartId:this.creditCartModel.cartId
+              cartId:response.data.id
             }
             this.savedCreditCartService.save(savedCreditCart).subscribe(response=>{
               if (response.success) {
@@ -99,9 +102,11 @@ export class PaymentComponent implements OnInit {
           this.paymentService.addPayment(payment).subscribe(response=>{
             if (response.success) {
               this.toastrService.success("Payment success","Pay")
-              this.router.navigate(['']);
+              this.router.navigate(['/cars']);
             }
           })
+        },responseError=>{
+          console.log(responseError)
         })
        
       }
@@ -111,7 +116,7 @@ export class PaymentComponent implements OnInit {
   payBySavedCart(){
     let paymentModel:Payment = {
       customerId:this.rental.customerId,
-      cartId:this.currentCreditCart.cartId, 
+      cartId:this.currentCreditCart.id, 
       price:this.rental.totalPrice
     }
     this.paymentService.addPayment(paymentModel).subscribe(response=>{

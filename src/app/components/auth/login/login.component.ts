@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(loginModel).subscribe(response=>{
         this.toastrService.info(response.message)
         this.localStorageService.set("Token",response.data.token);
+        this.localStorageService.set("Expiration",response.data.expiration);
         this.router.navigate([""])
       },responseError=>{
         console.log(responseError)
@@ -45,5 +46,4 @@ export class LoginComponent implements OnInit {
       this.toastrService.error("Form is invalid","Invalid")
     }
   }
-
 }

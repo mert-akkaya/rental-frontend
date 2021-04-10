@@ -21,7 +21,7 @@ export class CreditCartService {
 
   find(cartNumber:string):Observable<ItemResponseModel<CreditCart>>{
     let newPath = environment.apiUrl+"creditcarts/getcartbycartnumber?cartNumber="+cartNumber
-   return this.httpClient.post<ItemResponseModel<CreditCart>>(newPath,cartNumber);
+   return this.httpClient.get<ItemResponseModel<CreditCart>>(newPath);
   }
 
 }

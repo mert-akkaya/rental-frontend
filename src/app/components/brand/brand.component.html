@@ -23,7 +23,7 @@
 <ul *ngIf="dataLoad == true" class="list-group">
   <li class="list-group-item p-3 mb-2 bg-danger text-white">Brands</li>
   <li
-    routerLink="cars/brand/{{ brand.brandId }}"
+    routerLink="/brand/{{ brand.brandId }}"
     (click)="setCurrentBrand(brand)"
     *ngFor="let brand of brands | brandFilter:filterText"
     [class]="getCurrentBrandClass(brand)"
@@ -31,5 +31,5 @@
     {{ brand.brandName }}
   </li>
   <br />
-  <li routerLink="" class="list-group-item p-3 mb-2">All Cars</li>
+  <li routerLink="/cars" class="list-group-item p-3 mb-2">All Cars</li>
 </ul>

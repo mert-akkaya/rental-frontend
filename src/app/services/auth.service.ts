@@ -19,6 +19,7 @@ export class AuthService {
   email:string
   userId:number
   roles:string
+  expiration:Date
   jwtHelper:JwtHelperService = new JwtHelperService();
   constructor(private httpClient:HttpClient,private localStorageService:LocalStorageService
     ) { 
@@ -64,12 +65,18 @@ export class AuthService {
     var role = Object.keys(decoded).filter(x=>x.endsWith("role"))[0];
     this.roles = decoded[role];
   }
+  setExpration(){
+    var decoded = this.decodeToken();
+    var expiration = Object.keys(decoded).filter(x=>x.startsWith("exp"))[0]
+    this.expiration = decoded[expiration]
+  }
    setUserInfo(){
     if (this.isAuthenticated()) {
       this.setUserName()
       this.setEmail();
       this.setUserId();
       this.setUserRole();
+      this.setExpration();
     }
   }
 
@@ -84,6 +91,9 @@ export class AuthService {
   }
   getRoles(){
     return this.roles
+  }
+  getExpiration(){
+    return this.expiration
   }
 
   logOut(){

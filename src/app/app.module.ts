@@ -4,7 +4,8 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {JwtModule} from '@auth0/angular-jwt';
-import { NgxMaskModule,IConfig} from 'ngx-mask'
+import { NgxMaskModule,IConfig} from 'ngx-mask';
+import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +41,8 @@ import { ProfileCompanyComponent } from './components/profile/profile-company/pr
 import { ProfileFindexComponent } from './components/profile/profile-findex/profile-findex.component';
 import { ProfilePasswordComponent } from './components/profile/profile-password/profile-password.component';
 import { ProfileCreditCartComponent } from './components/profile/profile-credit-cart/profile-credit-cart.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { ExpirationInterceptor } from './interceptors/expiration.interceptor';
 
 
 @NgModule({
@@ -71,7 +74,8 @@ import { ProfileCreditCartComponent } from './components/profile/profile-credit-
     ProfileCompanyComponent,
     ProfileFindexComponent,
     ProfilePasswordComponent,
-    ProfileCreditCartComponent
+    ProfileCreditCartComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
@@ -84,10 +88,13 @@ import { ProfileCreditCartComponent } from './components/profile/profile-credit-
     }),
     NgxMaskModule.forRoot(),
     BrowserAnimationsModule,
-    JwtModule
+    JwtModule,
+    NgxBootstrapIconsModule.pick(allIcons)
   ],
   providers: [
-    { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
+    { provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
+   { provide:HTTP_INTERCEPTORS,useClass:ExpirationInterceptor,multi:true}
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
