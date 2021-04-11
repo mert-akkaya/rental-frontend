@@ -24,8 +24,8 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName:["",Validators.required],
       lastName:["",Validators.required],
-      email:["",Validators.required],
-      password:["",Validators.required]
+      email:["",[Validators.required,Validators.email]],
+      password:["",[Validators.required,Validators.minLength(4)]]
     });
   }
 
@@ -44,4 +44,9 @@ export class RegisterComponent implements OnInit {
       this.toastrService.error("Form is invalid","Invalid")
     }
   }
+
+  get firstName() {return this.registerForm.get('firstName')};
+  get lastName() {return this.registerForm.get('lastName')};
+  get email() {return this.registerForm.get('email')};
+  get password() {return this.registerForm.get('password')};
 }

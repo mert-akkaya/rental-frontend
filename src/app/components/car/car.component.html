@@ -58,7 +58,7 @@
               </li>
             </ul>
             <section style="float: left">
-              <button
+              <button appColor
                 routerLink="/car-detail/{{ car.carId }}"
                 type="button"
                 class="btn btn-primary"
@@ -67,7 +67,7 @@
               </button>
             </section>
             <section style="float: right">
-              <button
+              <button appColor
                 *ngIf="checkIfLogin()"
                 routerLink="/cars/update/{{ car.carId }}"
                 type="button"

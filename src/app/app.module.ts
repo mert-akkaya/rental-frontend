@@ -43,6 +43,7 @@ import { ProfilePasswordComponent } from './components/profile/profile-password/
 import { ProfileCreditCartComponent } from './components/profile/profile-credit-cart/profile-credit-cart.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { ExpirationInterceptor } from './interceptors/expiration.interceptor';
+import { ColorDirective } from './directives/color.directive';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { ExpirationInterceptor } from './interceptors/expiration.interceptor';
     ProfileFindexComponent,
     ProfilePasswordComponent,
     ProfileCreditCartComponent,
-    MainPageComponent
+    MainPageComponent,
+    ColorDirective
   ],
   imports: [
     BrowserModule,

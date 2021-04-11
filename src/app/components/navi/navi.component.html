@@ -47,7 +47,7 @@
           </button>
         </form>
         <div class="dropdown" *ngIf="checkIfLogin()==true" >
-          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <button appColor class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             {{this.authService.userName}}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

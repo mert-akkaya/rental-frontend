@@ -18,6 +18,12 @@
               id="floatingInput"
               placeholder="First Name"
             />
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+            class="alert alert-danger">
+            <div *ngIf="firstName.errors.required">
+              First Name is required.
+            </div>
+          </div>
             <label for="floatingInput">First Name</label>
           </div>
           <div class="form-floating">
@@ -28,6 +34,11 @@
               id="floatingInput"
               placeholder="Last Name"
             />
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+            class="alert alert-danger"><div *ngIf="lastName.errors.required">
+              Last Name is required.
+            </div></div>
+            
             <label for="floatingInput">Last Name</label>
           </div>
         <div class="form-floating">
@@ -38,6 +49,14 @@
             id="floatingInput"
             placeholder="name@example.com"
           />
+          <div *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+            Email is required.
+          </div>
+          <div *ngIf="email.errors.email">
+            Email must include "@"
+          </div></div>
           <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
@@ -48,6 +67,14 @@
             id="floatingPassword"
             placeholder="Password"
           />
+          <div *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 4 characters long.
+          </div></div>
           <label for="floatingPassword">Password</label>
         </div>
   

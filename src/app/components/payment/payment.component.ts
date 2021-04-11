@@ -121,7 +121,7 @@ export class PaymentComponent implements OnInit {
     }
     this.paymentService.addPayment(paymentModel).subscribe(response=>{
       this.toastrService.success("Payment Succes","Pay")
-      this.router.navigate(['']);
+      this.router.navigate(['/cars']);
     })
   }
   setCurrentCart(cart:CreditCart){

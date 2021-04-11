@@ -25,10 +25,11 @@ export class LoginComponent implements OnInit {
   
   createLoginForm(){
     this.loginForm = this.formBuilder.group({
-      email:["",Validators.required],
+      email:["",[Validators.required,Validators.email]],
       password:["",Validators.required]
     });
   }
+
 
   login(){
     if (this.loginForm.valid) {
@@ -46,4 +47,6 @@ export class LoginComponent implements OnInit {
       this.toastrService.error("Form is invalid","Invalid")
     }
   }
+  
+  get email() { return this.loginForm.get('email')}
 }
