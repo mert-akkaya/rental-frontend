@@ -56,7 +56,7 @@ export class ProfileInfoComponent implements OnInit {
         this.userService.updateForProfile(profileModel).subscribe(response=>{
        this.toastrService.success(response.message)  
        setTimeout(() => {
-        window.location.reload();
+        window.location.reload(); 
       }, 500);
       },responseError=>{
         this.toastrService.error(responseError.error);
